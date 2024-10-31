@@ -1,10 +1,4 @@
-tdesktop
-telegram-*
-cppgir*
-.old
-
-pkg/
-src/
-
-*.tar.zst
-*.tar.xz
+*
+!PKGBUILD
+!.SRCINFO
+!.gitignore
