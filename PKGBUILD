@@ -7,9 +7,9 @@
 
 _pkgname="ayugram-desktop"
 pkgname="$_pkgname-git"
-pkgver=5.6.3.r1.g4e0ffc1
+pkgver=5.8.3.r0.g87da02a
 pkgrel=1
-pkgdesc='Unofficial Telegram messaging app with ToS breaking features in mind'
+pkgdesc="Desktop Telegram client with good customization and Ghost mode"
 url="https://github.com/AyuGram/AyuGramDesktop"
 license=('GPL-3.0-or-later')
 arch=('x86_64' 'aarch64')
@@ -65,142 +65,193 @@ optdepends=(
   'xdg-desktop-portal: desktop integration'
 )
 
-provides=('ayugram-desktop')
-conflicts=('ayugram-desktop')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
 
-_pkgsrc="ayugram"
-source=(
-  "$_pkgsrc"::"git+https://github.com/AyuGram/AyuGramDesktop.git#branch=${_branch:-dev}"
-  #'apple.swift-corelibs-libdispatch'::'git+https://github.com/apple/swift-corelibs-libdispatch.git'
-  'ayugram.lib_tl'::'git+https://github.com/AyuGram/lib_tl.git'
-  'ayugram.lib_ui'::'git+https://github.com/AyuGram/lib_ui.git'
-  'cyan4973.xxhash'::'git+https://github.com/Cyan4973/xxHash.git'
-  'desktop-app.cmake_helpers'::'git+https://github.com/desktop-app/cmake_helpers.git'
-  'desktop-app.codegen'::'git+https://github.com/desktop-app/codegen.git'
-  'desktop-app.gsl'::'git+https://github.com/desktop-app/GSL.git'
-  'desktop-app.lib_base'::'git+https://github.com/desktop-app/lib_base.git'
-  'desktop-app.lib_crl'::'git+https://github.com/desktop-app/lib_crl.git'
-  'desktop-app.lib_lottie'::'git+https://github.com/desktop-app/lib_lottie.git'
-  'desktop-app.lib_qr'::'git+https://github.com/desktop-app/lib_qr.git'
-  'desktop-app.lib_rpl'::'git+https://github.com/desktop-app/lib_rpl.git'
-  'desktop-app.lib_spellcheck'::'git+https://github.com/desktop-app/lib_spellcheck.git'
-  'desktop-app.lib_storage'::'git+https://github.com/desktop-app/lib_storage.git'
-  'desktop-app.lib_webrtc'::'git+https://github.com/desktop-app/lib_webrtc.git'
-  'desktop-app.lib_webview'::'git+https://github.com/desktop-app/lib_webview.git'
-  'desktop-app.libprisma'::'git+https://github.com/desktop-app/libprisma.git'
-  'desktop-app.rlottie'::'git+https://github.com/desktop-app/rlottie.git'
-  #'ericniebler.range-v3'::'git+https://github.com/ericniebler/range-v3.git'
-  'fcitx.fcitx5-qt'::'git+https://github.com/fcitx/fcitx5-qt.git'
-  #'flatpak.xdg-desktop-portal'::'git+https://github.com/flatpak/xdg-desktop-portal.git'
-  'google.cld3'::'git+https://github.com/google/cld3.git'
-  'hamonikr.nimf'::'git+https://github.com/hamonikr/nimf.git'
-  'hime-ime.hime'::'git+https://github.com/hime-ime/hime.git'
-  'hunspell'::'git+https://github.com/hunspell/hunspell.git'
-  #'jemalloc'::'git+https://github.com/jemalloc/jemalloc.git'
-  'kde.kcoreaddons'::'git+https://github.com/KDE/kcoreaddons.git'
-  'kde.kimageformats'::'git+https://github.com/KDE/kimageformats.git'
-  'lz4'::'git+https://github.com/lz4/lz4.git'
-  'nayuki.qr-code-generator'::'git+https://github.com/nayuki/QR-Code-generator.git'
-  'tartanllama.expected'::'git+https://github.com/TartanLlama/expected.git'
-  'telegramdesktop.libtgvoip'::'git+https://github.com/telegramdesktop/libtgvoip.git'
-  'telegrammessenger.tgcalls'::'git+https://github.com/TelegramMessenger/tgcalls.git'
+_source_main() {
+  _pkgsrc="$_pkgname"
+  source=("$_pkgsrc"::"git+$url.git#branch=${_branch:-dev}")
+  sha256sums=('SKIP')
+}
 
-  "cppgir"::"git+https://gitlab.com/mnauw/cppgir.git"
-  "cppgir-expected-lite"::"git+https://github.com/martinmoene/expected-lite.git"
-)
+_source_ayugram() {
+  source+=(
+    #'apple.swift-corelibs-libdispatch'::'git+https://github.com/apple/swift-corelibs-libdispatch.git'
+    'ayugram.codegen'::'git+https://github.com/AyuGram/codegen.git'
+    'ayugram.lib_tl'::'git+https://github.com/AyuGram/lib_tl.git'
+    'ayugram.lib_ui'::'git+https://github.com/AyuGram/lib_ui.git'
+    'cyan4973.xxhash'::'git+https://github.com/Cyan4973/xxHash.git'
+    'desktop-app.cmake_helpers'::'git+https://github.com/desktop-app/cmake_helpers.git'
+    'desktop-app.lib_base'::'git+https://github.com/desktop-app/lib_base.git'
+    'desktop-app.lib_crl'::'git+https://github.com/desktop-app/lib_crl.git'
+    'desktop-app.lib_lottie'::'git+https://github.com/desktop-app/lib_lottie.git'
+    'desktop-app.lib_qr'::'git+https://github.com/desktop-app/lib_qr.git'
+    'desktop-app.lib_rpl'::'git+https://github.com/desktop-app/lib_rpl.git'
+    'desktop-app.lib_spellcheck'::'git+https://github.com/desktop-app/lib_spellcheck.git'
+    'desktop-app.lib_storage'::'git+https://github.com/desktop-app/lib_storage.git'
+    'desktop-app.lib_webrtc'::'git+https://github.com/desktop-app/lib_webrtc.git'
+    'desktop-app.lib_webview'::'git+https://github.com/desktop-app/lib_webview.git'
+    'desktop-app.libprisma'::'git+https://github.com/desktop-app/libprisma.git'
+    'desktop-app.rlottie'::'git+https://github.com/desktop-app/rlottie.git'
+    #'ericniebler.range-v3'::'git+https://github.com/ericniebler/range-v3.git'
+    'fcitx.fcitx5-qt'::'git+https://github.com/fcitx/fcitx5-qt.git'
+    'flatpak.xdg-desktop-portal'::'git+https://github.com/flatpak/xdg-desktop-portal.git'
+    'google.cld3'::'git+https://github.com/google/cld3.git'
+    'hamonikr.nimf'::'git+https://github.com/hamonikr/nimf.git'
+    'hime-ime.hime'::'git+https://github.com/hime-ime/hime.git'
+    #'hunspell'::'git+https://github.com/hunspell/hunspell.git'
+    #'jemalloc'::'git+https://github.com/jemalloc/jemalloc.git'
+    #'kde.kcoreaddons'::'git+https://github.com/KDE/kcoreaddons.git'
+    #'kde.kimageformats'::'git+https://github.com/KDE/kimageformats.git'
+    #'lz4'::'git+https://github.com/lz4/lz4.git'
+    'microsoft.gsl'::'git+https://github.com/Microsoft/GSL.git'
+    'nayuki.qr-code-generator'::'git+https://github.com/nayuki/QR-Code-generator.git'
+    'tartanllama.expected'::'git+https://github.com/TartanLlama/expected.git'
+    'telegramdesktop.libtgvoip'::'git+https://github.com/telegramdesktop/libtgvoip.git'
+    'telegrammessenger.tgcalls'::'git+https://github.com/TelegramMessenger/tgcalls.git'
+  )
+  sha256sums+=(
+    #'SKIP'
+    #'SKIP'
+    #'SKIP'
+    #'SKIP'
+    #'SKIP'
+    #'SKIP'
+    #'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+    'SKIP'
+  )
 
-sha256sums=(
-  #'SKIP'
-  #'SKIP'
-  #'SKIP'
-  #'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-  'SKIP'
-)
+  _prepare_ayugram() (
+    cd "$srcdir/$_pkgsrc"
+    local _submodules=(
+      #'apple.swift-corelibs-libdispatch'::'Telegram/ThirdParty/dispatch'
+      'ayugram.codegen'::'Telegram/codegen'
+      'ayugram.lib_tl'::'Telegram/lib_tl'
+      'ayugram.lib_ui'::'Telegram/lib_ui'
+      'cyan4973.xxhash'::'Telegram/ThirdParty/xxHash'
+      'desktop-app.cmake_helpers'::'cmake'
+      'desktop-app.lib_base'::'Telegram/lib_base'
+      'desktop-app.lib_crl'::'Telegram/lib_crl'
+      'desktop-app.lib_lottie'::'Telegram/lib_lottie'
+      'desktop-app.lib_qr'::'Telegram/lib_qr'
+      'desktop-app.lib_rpl'::'Telegram/lib_rpl'
+      'desktop-app.lib_spellcheck'::'Telegram/lib_spellcheck'
+      'desktop-app.lib_storage'::'Telegram/lib_storage'
+      'desktop-app.lib_webrtc'::'Telegram/lib_webrtc'
+      'desktop-app.lib_webview'::'Telegram/lib_webview'
+      'desktop-app.libprisma'::'Telegram/ThirdParty/libprisma'
+      'desktop-app.rlottie'::'Telegram/ThirdParty/rlottie'
+      #'ericniebler.range-v3'::'Telegram/ThirdParty/range-v3'
+      'fcitx.fcitx5-qt'::'Telegram/ThirdParty/fcitx5-qt'
+      'flatpak.xdg-desktop-portal'::'Telegram/ThirdParty/xdg-desktop-portal'
+      'google.cld3'::'Telegram/ThirdParty/cld3'
+      'hamonikr.nimf'::'Telegram/ThirdParty/nimf'
+      'hime-ime.hime'::'Telegram/ThirdParty/hime'
+      #'hunspell'::'Telegram/ThirdParty/hunspell'
+      #'jemalloc'::'Telegram/ThirdParty/jemalloc'
+      #'kde.kcoreaddons'::'Telegram/ThirdParty/kcoreaddons'
+      #'kde.kimageformats'::'Telegram/ThirdParty/kimageformats'
+      #'lz4'::'Telegram/ThirdParty/lz4'
+      'microsoft.gsl'::'Telegram/ThirdParty/GSL'
+      'nayuki.qr-code-generator'::'Telegram/ThirdParty/QR'
+      'tartanllama.expected'::'Telegram/ThirdParty/expected'
+      'telegramdesktop.libtgvoip'::'Telegram/ThirdParty/libtgvoip'
+      'telegrammessenger.tgcalls'::'Telegram/ThirdParty/tgcalls'
+    )
+    _submodule_update
+  )
+}
+
+_source_desktop_app_cmake_helpers() {
+  source+=(
+    'mnauw.cppgir'::'git+https://gitlab.com/mnauw/cppgir.git'
+    'yugr.implib.so'::'git+https://github.com/yugr/Implib.so.git'
+  )
+  sha256sums+=(
+    'SKIP'
+    'SKIP'
+  )
+
+  _prepare_desktop_app_cmake_helpers() (
+    cd "$srcdir/$_pkgsrc"
+    cd "cmake"
+    local _submodules=(
+      'mnauw.cppgir'::'external/glib/cppgir'
+      'yugr.implib.so'::'external/Implib.so'
+    )
+    _submodule_update
+  )
+}
+
+_source_mnauw_cppgir() {
+  source+=(
+    'martinmoene.expected-lite'::'git+https://github.com/martinmoene/expected-lite.git'
+  )
+  sha256sums+=(
+    'SKIP'
+  )
+
+  _prepare_mnauw_cppgir() (
+    cd "$srcdir/$_pkgsrc"
+    cd "cmake"
+    cd "external/glib/cppgir"
+    local _submodules=(
+      'martinmoene.expected-lite'::'expected-lite'
+    )
+    _submodule_update
+  )
+}
+
+_source_main
+_source_ayugram
+
+_source_desktop_app_cmake_helpers
+_source_mnauw_cppgir
+
+prepare() {
+  _submodule_update() {
+    local _module
+    for _module in "${_submodules[@]}"; do
+      git submodule init "${_module##*::}"
+      git submodule set-url "${_module##*::}" "$srcdir/${_module%::*}"
+      git -c protocol.file.allow=always submodule update "${_module##*::}"
+    done
+  }
+
+  _prepare_ayugram
+  _prepare_desktop_app_cmake_helpers
+  _prepare_mnauw_cppgir
+}
 
 pkgver() {
   cd "$_pkgsrc"
   git describe --long --tags --abbrev=7 \
     | sed -E 's/^[^0-9]*//;s/([^-]*-g)/r\1/;s/-/./g'
-}
-
-prepare() {
-  cd "$_pkgsrc"
-  git submodule init
-  #git config apple.swift-corelibs-libdispatch.url 'Telegram/ThirdParty/dispatch'
-  git config ayugram.lib_tl.url 'Telegram/lib_tl'
-  git config ayugram.lib_ui.url 'Telegram/lib_ui'
-  git config cyan4973.xxhash.url 'Telegram/ThirdParty/xxHash'
-  git config desktop-app.cmake_helpers.url 'cmake'
-  git config desktop-app.codegen.url 'Telegram/codegen'
-  git config desktop-app.gsl.url 'Telegram/ThirdParty/GSL'
-  git config desktop-app.lib_base.url 'Telegram/lib_base'
-  git config desktop-app.lib_crl.url 'Telegram/lib_crl'
-  git config desktop-app.lib_lottie.url 'Telegram/lib_lottie'
-  git config desktop-app.lib_qr.url 'Telegram/lib_qr'
-  git config desktop-app.lib_rpl.url 'Telegram/lib_rpl'
-  git config desktop-app.lib_spellcheck.url 'Telegram/lib_spellcheck'
-  git config desktop-app.lib_storage.url 'Telegram/lib_storage'
-  git config desktop-app.lib_webrtc.url 'Telegram/lib_webrtc'
-  git config desktop-app.lib_webview.url 'Telegram/lib_webview'
-  git config desktop-app.libprisma.url 'Telegram/ThirdParty/libprisma'
-  git config desktop-app.rlottie.url 'Telegram/ThirdParty/rlottie'
-  #git config ericniebler.range-v3.url 'Telegram/ThirdParty/range-v3'
-  git config fcitx.fcitx5-qt.url 'Telegram/ThirdParty/fcitx5-qt'
-  #git config flatpak.xdg-desktop-portal.url 'Telegram/ThirdParty/xdg-desktop-portal'
-  git config google.cld3.url 'Telegram/ThirdParty/cld3'
-  git config hamonikr.nimf.url 'Telegram/ThirdParty/nimf'
-  git config hime-ime.hime.url 'Telegram/ThirdParty/hime'
-  git config hunspell.url 'Telegram/ThirdParty/hunspell'
-  #git config jemalloc.url 'Telegram/ThirdParty/jemalloc'
-  git config kde.kcoreaddons.url 'Telegram/ThirdParty/kcoreaddons'
-  git config kde.kimageformats.url 'Telegram/ThirdParty/kimageformats'
-  git config lz4.url 'Telegram/ThirdParty/lz4'
-  git config nayuki.qr-code-generator.url 'Telegram/ThirdParty/QR'
-  git config tartanllama.expected.url 'Telegram/ThirdParty/expected'
-  git config telegramdesktop.libtgvoip.url 'Telegram/ThirdParty/libtgvoip'
-  git config telegrammessenger.tgcalls.url 'Telegram/ThirdParty/tgcalls'
-  git -c protocol.file.allow=always submodule update
-
-  cd "$srcdir/$_pkgsrc/cmake"
-  git submodule init
-  git config submodule.external/glib/cppgir.url "$srcdir/cppgir"
-  git -c protocol.file.allow=always submodule update
-
-  cd "$srcdir/$_pkgsrc/cmake/external/glib/cppgir"
-  git submodule init
-  git config submodule.expected-lite.url "$srcdir/cppgir-expected-lite"
-  git -c protocol.file.allow=always submodule update
 }
 
 build() {
