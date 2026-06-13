@@ -1,19 +1,19 @@
-# Maintainer:
+# Maintainer: Parsast <parsastdev@duck.com>
 # Contributor: westpain <homicide@disroot.org>
 # Contributor: rikki48 <xdxdxdxdlmao@mail.ru>
 
 ## options
 : ${_use_sodeps:=false}
 
-: ${_branch:=dev}
+: ${_branch:=uzbekgram}
 : ${_commit=}
 
-_pkgname="ayugram-desktop"
+_pkgname="uzbekgram-desktop"
 pkgname="$_pkgname-git"
-pkgver=6.7.8.r0.gb25513a
-pkgrel=2
-pkgdesc="Desktop Telegram client with good customization and Ghost mode"
-url="https://github.com/AyuGram/AyuGramDesktop"
+pkgver=6.7.8.gecbc6fa
+pkgrel=1
+pkgdesc="Fork of AyuGram Desktop with Booru integration (NSFW) and fun features"
+url="https://github.com/lutit/UzbekGramDesktop"
 license=('GPL-3.0-or-later')
 arch=('x86_64' 'aarch64')
 
@@ -71,7 +71,7 @@ optdepends=(
 provides=("$_pkgname")
 conflicts=("$_pkgname")
 
-options=('!lto')
+options=('!lto' '!debug')
 
 _pkgsrc="$_pkgname"
 _pkgsrc_tdlib="telegram-tdlib"
@@ -139,12 +139,12 @@ build() {
   cmake --build "build_tde2e"
   DESTDIR="$srcdir/deps" cmake --install "build_tde2e"
 
-  echo "Building ayugram..."
+  echo "Building uzbekgram..."
   local _cmake_options=(
     -B build
     -S "$_pkgsrc"
     -G Ninja
-    -DCMAKE_BUILD_TYPE=None
+    -DCMAKE_BUILD_TYPE=Release
     -DCMAKE_INSTALL_PREFIX=/usr
     -DCMAKE_PREFIX_PATH="$srcdir/deps/usr"
     -DDESKTOP_APP_DISABLE_AUTOUPDATE=ON

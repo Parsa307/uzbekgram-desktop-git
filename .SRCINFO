@@ -1,8 +1,8 @@
-pkgbase = ayugram-desktop-git
-	pkgdesc = Desktop Telegram client with good customization and Ghost mode
-	pkgver = 6.7.8.r0.gb25513a
-	pkgrel = 2
-	url = https://github.com/AyuGram/AyuGramDesktop
+pkgbase = uzbekgram-desktop-git
+	pkgdesc = Fork of AyuGram Desktop with Booru integration (NSFW) and fun features
+	pkgver = 6.7.8.gecbc6fa
+	pkgrel = 1
+	url = https://github.com/lutit/UzbekGramDesktop
 	arch = x86_64
 	arch = aarch64
 	license = GPL-3.0-or-later
@@ -48,12 +48,12 @@ pkgbase = ayugram-desktop-git
 	depends = libxtst
 	optdepends = webkit2gtk: embedded browser features
 	optdepends = xdg-desktop-portal: desktop integration
-	provides = ayugram-desktop
-	conflicts = ayugram-desktop
+	provides = uzbekgram-desktop
+	conflicts = uzbekgram-desktop
 	options = !lto
-	source = ayugram-desktop::git+https://github.com/AyuGram/AyuGramDesktop.git#branch=dev
+	source = uzbekgram-desktop::git+https://github.com/lutit/UzbekGramDesktop.git#branch=uzbekgram
 	source = telegram-tdlib::git+https://github.com/tdlib/td.git
 	sha256sums = SKIP
 	sha256sums = SKIP
 
-pkgname = ayugram-desktop-git
+pkgname = uzbekgram-desktop-git
